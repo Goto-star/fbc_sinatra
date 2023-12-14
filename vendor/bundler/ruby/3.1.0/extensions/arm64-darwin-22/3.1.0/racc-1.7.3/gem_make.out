@@ -1,0 +1,17 @@
+current directory: /Users/yuta.goto/fbc_sinatra/vendor/bundler/ruby/3.1.0/gems/racc-1.7.3/ext/racc/cparse
+/Users/yuta.goto/.rbenv/versions/3.1.4/bin/ruby -I /Users/yuta.goto/.rbenv/versions/3.1.4/lib/ruby/3.1.0 extconf.rb
+creating Makefile
+
+current directory: /Users/yuta.goto/fbc_sinatra/vendor/bundler/ruby/3.1.0/gems/racc-1.7.3/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20231213-66566-m8dmwj sitelibdir\=./.gem.20231213-66566-m8dmwj clean
+
+current directory: /Users/yuta.goto/fbc_sinatra/vendor/bundler/ruby/3.1.0/gems/racc-1.7.3/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20231213-66566-m8dmwj sitelibdir\=./.gem.20231213-66566-m8dmwj
+compiling cparse.c
+linking shared-object racc/cparse.bundle
+ld: warning: -multiply_defined is obsolete
+ld: warning: ignoring duplicate libraries: '-lruby.3.1'
+
+current directory: /Users/yuta.goto/fbc_sinatra/vendor/bundler/ruby/3.1.0/gems/racc-1.7.3/ext/racc/cparse
+make DESTDIR\= sitearchdir\=./.gem.20231213-66566-m8dmwj sitelibdir\=./.gem.20231213-66566-m8dmwj install
+/usr/bin/install -c -m 0755 cparse.bundle ./.gem.20231213-66566-m8dmwj/racc

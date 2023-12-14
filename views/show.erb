@@ -1,0 +1,13 @@
+<div class="show-content wrapper">
+  <h2><%= @page_title %></h2>
+  <div>
+    <p>title:<%= CGI.escapeHTML(@title) %></p>
+    <p>content:<%= CGI.escapeHTML(@content) %></p>
+  </div>
+  <a href="/">メモ一覧に戻る</a>
+  <a href="/memos/<%= params[:id] %>/edit">編集する</a>
+  <form action="/memos/<%= params[:id] %>" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="delete" class="button">
+  </form>
+</div>
