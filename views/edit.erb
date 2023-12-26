@@ -1,0 +1,20 @@
+<div class="edit-content wrapper">
+  <h2><%= @page_title %></h2>
+  <form action="/memos/<%= params[:id] %>" method="post">
+    <div>
+      <label for="title">title</label>
+      <input type="text" id="title" name="title" value="<%= @title %>">
+    </div>
+
+    <div>
+      <label for="content">content</label>
+      <textarea name="content" id="content"><%= @content %></textarea>
+    </div>
+
+    <div>
+      <input type="hidden" name="_method" value="patch">
+      <input type="submit" class="button" value="submit!!">
+    </div>
+  </form>
+  <a href="/">メモ一覧に戻る</a>
+</div>

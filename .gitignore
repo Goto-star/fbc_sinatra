@@ -1,0 +1,7 @@
+# フォルダ
+.bundle/
+vendor/
+
+# ファイル
+.erb-lint.yml
+Gemfile.lock

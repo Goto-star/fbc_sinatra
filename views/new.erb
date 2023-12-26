@@ -1,0 +1,17 @@
+<div class="new-content wrapper">
+  <h2><%= @page_title %></h2>
+  <form action="/memos" method="post">
+    <div>
+      <label for="title">title</label>
+      <input type="text" id="title" name="title">
+    </div>
+
+    <div>
+      <label for="content">content</label>
+      <textarea name="content" id="content"></textarea>
+    </div>
+
+    <input type="submit" class="button" value="submit!!">
+  </form>
+  <a href="/">メモ一覧に戻る</a>
+</div>

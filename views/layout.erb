@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>メモアプリ</title>
+    <meta name="description" content="fbcのプラクティス「Sinatra を使ってWebアプリケーションの基本を理解する」課題">
+
+    <%# CSS %>
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+
+  <body>
+    <section class="memo">
+      <header class="page-header wrapper">
+        <h1><a href="/">メモアプリ</a></h1>
+        <a class="button header-button" href="/memos/new">追加</a>
+      </header>
+      <%= yield %>
+    </section>
+  </body>
+</html>
