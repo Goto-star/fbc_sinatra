@@ -1,8 +1,8 @@
 <div class=" wrapper">
   <h2><%= @page_title %></h2>
   <ul>
-    <% @memos.each do |id, memo| %>
-      <li><a href="/memos/<%= id %>"><%= CGI.escapeHTML(memo["title"]) %></a></li>
+    <% @memos.each do |memo| %>
+      <li><a href="/memos/<%= memo["id"] %>"><%= CGI.escapeHTML(memo["title"]) %></a></li>
     <% end %>
   </ul>
 </div>

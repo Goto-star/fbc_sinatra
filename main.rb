@@ -4,29 +4,25 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'json'
 require 'cgi/escape'
+require 'pg'
+
+configure do
+  result = connection.exec("SELECT * FROM information_schema.tables WHERE table_name = 'memos'")
+  connection.exec('CREATE TABLE memos (id serial, title text, content text)') if result.values.empty?
+end
 
 helpers do
   include Rack::Utils
   alias_method :escape_proccesing, :escape_html
 end
 
-FILE_PATH = 'public/memo.json'
-
-def get_memos(file_path)
-  File.open(file_path) do |file|
-    JSON.parse(file.read)
-  end
-end
-
-def add_memos(file_path, memos)
-  File.open(file_path, 'w') do |f|
-    JSON.dump(memos, f)
-  end
+def connection
+  PG.connect(dbname: 'fbc_memo_app')
 end
 
 get '/' do
   @page_title = 'top'
-  @memos = get_memos(FILE_PATH)
+  @memos = connection.exec('SELECT * FROM memos')
   erb :index
 end
 
@@ -37,47 +33,39 @@ end
 
 get '/memos/:id' do
   @page_title = 'show'
-  memos = get_memos(FILE_PATH)
-  @title = memos[params[:id]]['title']
-  @content = memos[params[:id]]['content']
+  memo = connection.exec_params('SELECT * FROM memos WHERE id = $1;', [params[:id]]).values[0]
+  @title = memo[1]
+  @content = memo[2]
   erb :show
 end
 
 get '/memos/:id/edit' do
   @page_title = 'edit'
-  memos = get_memos(FILE_PATH)
-  @title = memos[params[:id]]['title']
-  @content = memos[params[:id]]['content']
+  memo = connection.exec_params('SELECT * FROM memos WHERE id = $1;', [params[:id]]).values[0]
+  @title = memo[1]
+  @content = memo[2]
   erb :edit
 end
 
 post '/memos' do
   title = params[:title]
   content = params[:content]
-
-  memos = get_memos(FILE_PATH)
-  id = (memos.keys.map(&:to_i).max + 1).to_s
-  memos[id] = { 'title' => title, 'content' => content }
-  add_memos(FILE_PATH, memos)
+  connection.exec_params('INSERT INTO memos(title, content) VALUES($1, $2)', [title, content])
 
   redirect '/'
 end
 
 patch '/memos/:id' do
+  id = params[:id]
   title = params[:title]
   content = params[:content]
-
-  memos = get_memos(FILE_PATH)
-  memos[params[:id]] = { 'title' => title, 'content' => content }
-  add_memos(FILE_PATH, memos)
+  connection.exec_params('UPDATE memos SET title=$2, content=$3 WHERE id=$1', [id, title, content])
 
   redirect "/memos/#{params[:id]}"
 end
 
 delete '/memos/:id' do
-  memos = get_memos(FILE_PATH)
-  memos.delete(params[:id])
-  add_memos(FILE_PATH, memos)
+  connection.exec_params('DELETE FROM memos WHERE id=$1', [params[:id]])
 
   redirect '/'
 end
