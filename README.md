@@ -3,6 +3,65 @@
 プラクティス「Sinatra を使ってWebアプリケーションの基本を理解する」の課題です。
 
 # 使用手順
+
+## 1.データベースの準備
+
+1.Homebrewを確認してください。
+
+```
+brew --version
+```
+
+2.インストールできるpostgreSQLを確認してください。
+
+```
+brew search postgresql
+```
+
+3.postgreSQLをインストールしてください。
+
+```
+brew install postgresql
+```
+バージョン確認の実施
+
+```
+psql --version
+```
+
+## 2.データベースの作成
+
+4.postgreSQLを起動してください。
+```
+brew services start postgresql
+```
+
+5.postgreSQLへログインします。
+
+```
+psql postgres
+```
+
+6.データベースを作成します。
+
+```
+create database fbc_memo_app;
+```
+
+7.先ほど作成したdbに接続します。
+
+```
+psql fbc_memo_app
+```
+
+6.テーブルを作成してください。
+
+```
+create table memos(id serial, title text, content text);
+```
+
+## 3.アプリケーションの用意
+
 1.作業用PCの任意のディレクトリにgit cloneしてください。
 
 ```
