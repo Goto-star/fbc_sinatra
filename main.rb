@@ -2,14 +2,8 @@
 
 require 'sinatra'
 require 'sinatra/reloader'
-require 'json'
 require 'cgi/escape'
 require 'pg'
-
-configure do
-  result = connection.exec("SELECT * FROM information_schema.tables WHERE table_name = 'memos'")
-  connection.exec('CREATE TABLE memos (id serial, title text, content text)') if result.values.empty?
-end
 
 helpers do
   include Rack::Utils
@@ -17,7 +11,7 @@ helpers do
 end
 
 def connection
-  PG.connect(dbname: 'fbc_memo_app')
+  @connection ||= PG.connect(dbname: 'fbc_memo_app')
 end
 
 get '/' do

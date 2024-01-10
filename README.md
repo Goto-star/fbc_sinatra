@@ -42,10 +42,22 @@ brew services start postgresql
 psql postgres
 ```
 
-6.テーブル作成コマンドを実行してください。
+6.データベースを作成します。
 
 ```
-create table fbc_memo_app;
+create database fbc_memo_app;
+```
+
+7.先ほど作成したdbに接続します。
+
+```
+psql fbc_memo_app
+```
+
+6.テーブルを作成してください。
+
+```
+create table memos(id serial, title text, content text);
 ```
 
 ## 3.アプリケーションの用意
